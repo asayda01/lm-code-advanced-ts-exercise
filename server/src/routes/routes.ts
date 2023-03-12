@@ -1,7 +1,7 @@
 import * as express from "express";
 import { Express } from "express";
 import { getAllPosts } from "../services/posts_service";
-import { getAllUsers } from "../services/users_service";
+import { addNewUser , getAllUsers } from "../services/users_service";
 
 /*
 
@@ -83,6 +83,22 @@ function addAPIRoutes(app: Express) {
 	});
 
 	// ❗ [1] See README
+
+	console.log("✍️  Adding add user routes...");
+	
+	apiRouter.post("/users/add", (req, res) => {
+		const { body } = req;
+
+		console.log(`👋 Adding new user "${body.userName}"`);
+
+		addNewUser({
+			id: `${getAllUsers().length + 1}`,
+			name: body.userName,
+			creationDate: new Date(),
+		});
+
+		res.status(200).send({ success: true });
+	});
 
 	apiRouter.get("/users/:id", (req, res) => {
 		res

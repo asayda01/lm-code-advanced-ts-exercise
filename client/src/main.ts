@@ -8,6 +8,8 @@ import { State } from "./states/state";
 import { states } from "./states/states";
 import { clear, print, printNewLine, prompt } from "./ui/console";
 
+import { addNewUser } from "./menu/options/add_new_user/add_new_user";
+
 async function begin() {
 	clear(true);
 	print("👋 Welcome to our cool blog browser!");
@@ -45,9 +47,11 @@ async function main() {
 				break;
 			case "ADD_USER":
 				clear(true);
-				print("🏗️  This functionality has not been implemented!");
-				await prompt("⌨️ Press [ENTER] to return to the main menu! 🕶️");
-				state.set(states.MENU);
+				//print("🏗️  This functionality has not been implemented!");
+				const user = await addNewUser();
+				state.set(user);
+				//await prompt("⌨️ Press [ENTER] to return to the main menu! 🕶️");
+				//state.set(states.MENU);
 				break;
 			case "UNKNOWN":
 				clear(true);
