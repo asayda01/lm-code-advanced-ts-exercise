@@ -3,8 +3,8 @@ import { clear, print, prompt, printNewLine } from "../../../ui/console";
 
 export async function browsePosts() {
 	clear(false);
-
-	const desiredPostId = await prompt("Enter Post ID");
+	
+	const desiredPostId : string = await prompt("Enter Post ID");
 
 	// TODO: should we validate this?!
 
