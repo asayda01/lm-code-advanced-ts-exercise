@@ -9,6 +9,7 @@ import { states } from "./states/states";
 import { clear, print, printNewLine, prompt } from "./ui/console";
 
 import { addNewUser } from "./menu/options/add_new_user/add_new_user";
+import { addNewPost } from "./menu/options/add_new_post/add_new_post";
 
 async function begin() {
 	clear(true);
@@ -52,6 +53,11 @@ async function main() {
 				state.set(user);
 				//await prompt("⌨️ Press [ENTER] to return to the main menu! 🕶️");
 				//state.set(states.MENU);
+				break;
+			case "ADD_POST":
+				clear(true);
+				const NewPost = await addNewPost();
+				state.set(NewPost);
 				break;
 			case "UNKNOWN":
 				clear(true);

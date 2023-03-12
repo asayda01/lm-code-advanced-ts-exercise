@@ -36,3 +36,9 @@ export function addNewUser(user: User) {
 	users.push(user);
 	
 };
+
+export function getUserById(id : string) {
+
+	return users.find((user) => user.id === id);
+	
+}

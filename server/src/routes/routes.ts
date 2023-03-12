@@ -1,7 +1,7 @@
 import * as express from "express";
 import { Express } from "express";
-import { getAllPosts } from "../services/posts_service";
-import { addNewUser , getAllUsers } from "../services/users_service";
+import { addNewPost , getAllPosts } from "../services/posts_service";
+import { addNewUser , getAllUsers , getUserById } from "../services/users_service";
 
 /*
 
@@ -84,7 +84,7 @@ function addAPIRoutes(app: Express) {
 
 	// ❗ [1] See README
 
-	console.log("✍️  Adding add user routes...");
+	console.log("✍️  Adding add user routes... ");
 	
 	apiRouter.post("/users/add", (req, res) => {
 		const { body } = req;
@@ -107,6 +107,31 @@ function addAPIRoutes(app: Express) {
 				JSON.stringify(getAllUsers().filter((u) => u.id === req.params.id))
 			);
 	});
+
+
+	console.log(" ✍️ Adding add  post routes... ");
+	apiRouter.post("/posts/add", (req, res) => {
+		const { body } = req;
+
+
+		console.log(` ✍️ Adding new post about "${body.title}"`);
+
+		const author = getUserById(body.authorID);
+		if (author) {
+			const post = {
+				id: `${getAllPosts().length + 1}`,
+				title: body.title,
+				text: body.text,
+				author,
+			}
+			addNewPost(post);
+			res.status(200).send({ success: true });
+		} else {
+			res.status(404).send({ success: false });
+		}
+		//res.status(200).send({ success: true });
+		
+	});	
 
 	console.log("🛠️  Applying API router to Express server...");
 	app.use("/api", apiRouter);
