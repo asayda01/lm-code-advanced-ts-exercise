@@ -1,7 +1,6 @@
-import { print, prompt } from "../ui/console.mjs";
-import { baseUrl } from "./base_url.mjs";
-
-export async function sendMessageToServer(message) {
+import { print, prompt } from "../ui/console";
+import { baseUrl } from "./base_url";
+export async function sendMessageToServer(message:string) {
 	try {
 		const result = await fetch(baseUrl + "/api/send/", {
 			headers: {
